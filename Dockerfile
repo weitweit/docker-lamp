@@ -4,10 +4,7 @@
 ############################################################
 
 # Set the base image to Ubuntu
-FROM ubuntu:12.04
-
-# File Author / Maintainer
-MAINTAINER Kaushal Kishore <kaushal.rahuljaiswal@gmail.com>
+FROM debian:8.6
 
 # Set the enviroment variable
 ENV DEBIAN_FRONTEND noninteractive
@@ -16,12 +13,16 @@ ENV DEBIAN_FRONTEND noninteractive
 RUN apt-get clean all
 RUN apt-get update 
 RUN apt-get -y install supervisor 
-RUN apt-get -y install mysql-server 
-RUN apt-get -y install apache2 
+RUN apt-get -y install mysql-server mysql-client php5-mysql
+#RUN apt-get -y install mariadb-server mariadb-client php5-mysql
+RUN apt-get -y install apache2
+RUN apt-get -y install wget vim
 RUN apt-get -y install php5 libapache2-mod-php5 php5-mysql php5-gd php-pear php-apc php5-curl curl lynx-cur
 
 # Add shell scripts for starting apache2
 ADD apache2-start.sh /apache2-start.sh
+
+ADD configs/apache2/apache_default /etc/apache2/sites-available/000-default.conf
 
 # Add shell scripts for starting mysql
 ADD mysql-start.sh /mysql-start.sh
@@ -31,9 +32,8 @@ ADD run.sh /run.sh
 RUN chmod 755 /*.sh
 
 # Add the Configurations files
-ADD my.cnf /etc/mysql/conf.d/my.cnf
-ADD supervisord-lamp.conf /etc/supervisor/conf.d/supervisord-lamp.conf
-
+ADD configs/mysql/my.cnf /etc/mysql/my.cnf
+ADD configs/supervisor/supervisor-lamp.conf /etc/supervisor/conf.d/supervisor-lamp.conf
 
 # Remove pre-installed database
 RUN rm -rf /var/lib/mysql/*
@@ -56,7 +56,7 @@ VOLUME  ["/etc/mysql", "/var/lib/mysql" ]
 VOLUME /var/www
 
 # Set the port
-EXPOSE 80 3306
+EXPOSE 80 3306:32842
 
 # Execut the run.sh 
 CMD ["/run.sh"]

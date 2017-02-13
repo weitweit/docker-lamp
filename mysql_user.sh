@@ -15,4 +15,4 @@ mysql -uroot -e "CREATE USER '${MYSQL_USER}'@'%' IDENTIFIED BY '${MYSQL_PASS}'"
 mysql -uroot -e "GRANT ALL PRIVILEGES ON *.* TO '${MYSQL_USER}'@'%' WITH GRANT OPTION"
 
 echo "MySQL User : ${MYSQL_USER} and MySQL Password : ${MYSQL_PASS}"
-mysqladmin -uroot shutdown
+#mysqladmin -uroot shutdown

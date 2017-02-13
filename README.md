@@ -1,4 +1,4 @@
-Created by Kaushal Kishore <br>
+Modified dockerfile, originally created by Kaushal Kishore <br>
 Email : kaushal.rahuljaiswal@gmail.com<br>
 Website : http://www.kaushalkishore.com<br>
 
