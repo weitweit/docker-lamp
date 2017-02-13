@@ -9,13 +9,13 @@ Website : http://www.kaushalkishore.com<br>
 <b>Step 1 :</b> Clone the Docker-LAMP.git
 <pre>
 <b>Command: </b>
-git clone https://github.com/kaushalkishorejaiswal/Docker-LAMP.git
+git clone https://github.com/weitweit/docker-lamp.git
 </pre>
 
 <b>Step 2 :</b> Change the directory to the clone folder
 <pre>
 <b>Command:</b>
-cd Docker-LAMP
+cd docker-lamp
 </pre>
 
 <b>Step 3 :</b> Create the Docker Image
